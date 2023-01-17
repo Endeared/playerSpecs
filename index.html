@@ -1,33 +1,43 @@
-<head>
-  <title>PublicBoard Spreadsheet Test using Tabletop.js</title>
-  <meta charset="utf-8" />
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Loading datatables, a JS library from the CDN -->
+    <script src="<https://code.jquery.com/jquery-3.5.1.js>"></script>
+    <link rel="stylesheet" type="text/css" href="<https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css>">
+    <script type="text/javascript" charset="utf8" src="<https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js>">
+    </script>
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
-  <script type='text/javascript'>
-    var response = [];
+    
+    <script>
+      /*
+      * The line below invokes the getData() function in the Code.gs file, 
+      * It passes the returned data to showData() function
+      */
+      google.script.run.withSuccessHandler(showData).getData();
+    
+      // This function leverages the JS datatables lib to render our table to the DOM
+      // using the data the function receives
+      function showData(dataArray){
+        console.log()
+        $(document).ready(function(){
+          $('#table-data').DataTable({
+            data: dataArray,
 
-    var publicSpreadsheetUrl =
-      'https://docs.google.com/spreadsheets/d/1mDoiw-6C3QNSboFg08yp02fX95qAg0vVgTYgIr3IUg0/edit#gid=1567670408';
-
-    function init() {
-      Tabletop.init({
-        key: publicSpreadsheetUrl,
-        callback: showInfo,
-        simpleSheet: true
-      })
-    }
-
-    function showInfo(data, tabletop) {
-      alert('Successfully processed!')
-      console.log(data);
-    }
-
-    window.addEventListener('DOMContentLoaded', init)
-  </script>
-</head>
-
-<body>
-  <p>PublicBoard Spreadsheet Test using Tabletop.js</p>
-</body>
-
+            columns: [
+              {"title":"First Name"},
+              {"title":"Last Name"}
+            ]
+          });
+        });
+      }      
+    </script>
+  </head>
+ 
+  <body>
+    <div>
+      <table id="table-data">
+          <!-- showData() function defined above would inject table data here -->
+      </table>
+    </div>
+  </body>
 </html>
