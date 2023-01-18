@@ -1,43 +1,27 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <!-- Loading datatables, a JS library from the CDN -->
-    <script src="<https://code.jquery.com/jquery-3.5.1.js>"></script>
-    <link rel="stylesheet" type="text/css" href="<https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css>">
-    <script type="text/javascript" charset="utf8" src="<https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js>">
-    </script>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <script src="//script.sheetsu.com/"></script>
+  <title>Document</title>
+</head>
+<body>
 
-    
-    <script>
-      /*
-      * The line below invokes the getData() function in the Code.gs file, 
-      * It passes the returned data to showData() function
-      */
-      google.script.run.withSuccessHandler(showData).getData();
-    
-      // This function leverages the JS datatables lib to render our table to the DOM
-      // using the data the function receives
-      function showData(dataArray){
-        console.log()
-        $(document).ready(function(){
-          $('#table-data').DataTable({
-            data: dataArray,
+  <div id='mainCont'>
+  </div>
+  
+</body>
+<script>
+  function successFunc(data) {
+  console.log(data);
+}
 
-            columns: [
-              {"title":"First Name"},
-              {"title":"Last Name"}
-            ]
-          });
-        });
-      }      
-    </script>
-  </head>
- 
-  <body>
-    <div>
-      <table id="table-data">
-          <!-- showData() function defined above would inject table data here -->
-      </table>
-    </div>
-  </body>
+Sheetsu.read(
+  "https://sheetsu.com/apis/v1.0lw/020b2c0f/",
+  {},
+  successFunc
+);
+</script>
 </html>
